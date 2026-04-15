@@ -58,7 +58,7 @@ test.describe('проверка работы регистрации', () => {
         await expect(confirmPassword).toBeVisible();
         await expect(confirmPassword).toHaveText('Підтвердження паролю');
 
-        const inputConfirmPassword = page.getByTestId('register-confirm-password-input')
+        const inputConfirmPassword = page.getByTestId('register-confirm-password-input');
         await expect(inputConfirmPassword).toBeVisible();
         await inputConfirmPassword.fill('qwerty');
         await expect(inputConfirmPassword).toHaveValue('qwerty');

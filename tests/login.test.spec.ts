@@ -37,7 +37,7 @@ test.describe('проверка работы авторизации', () => {
         const inputEmail = page.getByTestId ('login-email-input');
         await expect (inputEmail).toBeVisible ();
         await inputEmail.fill('admin@demo.com');
-        await expect (inputEmail).toHaveValue;
+        await expect (inputEmail).toHaveValue ('admin@demo.com');
 
         const passwordField = page.locator('.block').nth(1);
         await expect (passwordField).toBeVisible ();
@@ -46,14 +46,14 @@ test.describe('проверка работы авторизации', () => {
         const inputPassword = page.getByTestId ('login-password-input');
         await expect (inputPassword).toBeVisible ();
         await inputPassword.fill('admin123');
-        await expect (inputPassword).toHaveValue;
+        await expect (inputPassword).toHaveValue ('admin123');
 
         const buttonLogin = page.getByTestId ('login-submit-button');
-        await expect (buttonLogin).toBeVisible;
+        await expect (buttonLogin).toBeVisible ();
         await buttonLogin.click();
 
         const avatarka = page.locator('.lucide-user');
-        await expect (avatarka).toBeVisible;
+        await expect (avatarka).toBeVisible ();
 
     })
     test('проверка регистрации', async({page}) => {
