@@ -31,15 +31,15 @@ export class LoginPage {
  
         this.logo = page.locator('.lucide-user-plus');
  
-        this.registration = page.getByTestId('login-title');
+        this.registration = page.getByTestId('register-title');
         this.createNewRecord = page.locator('.text-gray-600').first();
         this.haveRecord = page.locator('.text-gray-600').nth(1);
  
         this.fullName = page.locator('.block').nth(0);
-        this.inputName = page.locator('register-name-input').nth(1);
+        this.inputName = page.getByTestId('register-name-input');
  
-        this.email = page.getByTestId('.block').nth(1);
-        this.inputEmail = page.getByTestId('login-password-input');
+        this.email = page.locator('.block').nth(1);
+        this.inputEmail = page.getByTestId('register-email-input');
         
         this.password = page.locator('.block').nth(2);
         this.inputPassword = page.getByTestId('register-password-input');
@@ -85,7 +85,7 @@ export class LoginPage {
         await this.inputPassword.fill(password);
         await expect(this.inputPassword).toHaveValue(password);
 
-        await this.inputConfirmPassword.fill(password);
+        await this.inputConfirmPassword.fill(confirmPassword);
         await expect(this.inputConfirmPassword).toHaveValue(confirmPassword);
 
         await this.currencySelect.selectOption(currency);
