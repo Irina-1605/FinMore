@@ -1,6 +1,6 @@
 import { Page, Locator, expect } from '@playwright/test';
  
-export class LoginPage {
+export class RegistrPage {
     readonly page: Page;
  
     // Locators
@@ -25,6 +25,12 @@ export class LoginPage {
     readonly registrationButton: Locator;
  
     readonly avatarka: Locator;
+
+    readonly nameError: Locator;
+    readonly emailError: Locator;
+    readonly passwordError: Locator;
+    readonly confirmPasswordError: Locator;
+
 
     constructor(page: Page) {
         this.page = page;
@@ -51,6 +57,11 @@ export class LoginPage {
 
         this.registrationButton = page.getByTestId('register-submit-button');
 
+        this.nameError = page.getByTestId('name-error');
+        this.emailError = page.getByTestId('email-error');
+        this.passwordError = page.getByTestId('password-error');
+        this.confirmPasswordError = page.getByTestId('confirm-password-error');
+
         this.avatarka = page.locator('.lucide-user');
 
     }
@@ -64,6 +75,20 @@ export class LoginPage {
         await expect(this.createNewRecord).toHaveText('Створіть новий обліковий запис');
  
         await expect(this.haveRecord).toHaveText('Вже маєте обліковий запис? Увійти');
+
+    }
+
+    async checkRegistrationTexts() {
+
+        await expect(this.nameError).toHaveText("Ім'я обов'язкове");
+
+        await expect(this.emailError).toHaveText("Email обов'язковий");
+
+        await expect(this.passwordError).toHaveText("Пароль обов'язковий");
+
+        await expect(this.confirmPasswordError).toHaveText("Підтвердження паролю обов'язкове");
+
+
     }
  
     async checkLabels() {
