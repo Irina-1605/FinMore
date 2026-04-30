@@ -89,12 +89,14 @@ export class LoginPage {
  
     async login(email: string, password: string) {
 
-        
-        await this.inputEmail.fill(email);
-        await expect(this.inputEmail).toHaveValue(email);
+        await Actions.fillField(this.inputEmail, email);
+        await Actions.fillField(this.inputPassword, password);
+
+        // await this.inputEmail.fill(email);
+        // await expect(this.inputEmail).toHaveValue(email);
  
-        await this.inputPassword.fill(password);
-        await expect(this.inputPassword).toHaveValue(password);
+        // await this.inputPassword.fill(password);
+        // await expect(this.inputPassword).toHaveValue(password);
 
         await Actions.click(this.buttonLogin);
         
