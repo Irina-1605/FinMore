@@ -35,9 +35,7 @@ test.describe('Auth flow: Login', () => {
             await loginPage.checkLabels();
 
         });
-
-        const login  = loginUser();
-
+ 
         // const user = loginUser();
         
         // const user = {
@@ -48,31 +46,25 @@ test.describe('Auth flow: Login', () => {
 
         // }
 
-        await test.step('Fill registration form', async () => {
+          
+        await test.step('Fill registration form invalid user', async () => {
 
             await loginPage.login(
 
-                login.email,
-                login.password
-
-        //         data.validUser.email,
-        //         data.validUser.password
+                data.invalidUser.email,
+                data.invalidUser.password
             )
 
         });    
         
-        
-        
         // 5. Check user logged in
 
-        await test.step('Verify user is logged in', async () => {
+        await test.step('Verify creds are not valid', async () => {
 
-            await loginPage.checkUserLoggedIn();
+            await loginPage.checkNegativeLoginTexts();
 
         });
  
     });
 
 });
-
- 

@@ -1,16 +1,17 @@
 import { test, expect } from '@playwright/test';
 
 import { LoginPage } from '../pages/LoginPage';
-import { RegistrPage } from '../pages/RegistrPage';
+import { RegistrationPage } from '../pages/RegistrationPage';
+import { generateUser } from '../data/user.data';
 
  
-test.describe('Auth flow: Login + Registration', () => {
+test.describe('Auth flow: Registration', () => {
  
     test('User can open login page, go to register and create account', async ({ page }) => {
  
         const loginPage = new LoginPage(page);
 
-        const registrPage = new RegistrPage(page);
+        const registrationPage = new RegistrationPage(page);
  
         //  1. Open login page
 
@@ -28,31 +29,34 @@ test.describe('Auth flow: Login + Registration', () => {
 
         await test.step('Go to registration page', async () => {
 
-            await registrPage.checkLogoVisible();
+            await registrationPage.checkLogoVisible();
 
-            await registrPage.checkLoginTexts();
+            await registrationPage.checkLoginTexts();
 
         });
  
         // 4. Register new user
 
-        const user = {
+        const user = generateUser();
+        
 
-            name: 'Test User',
+        // const user = {
 
-            email: `test${Date.now()}@mail.com`,
+        //     name: 'Test User',
 
-            password: 'Qwerty123!',
+        //     email: `test${Date.now()}@mail.com`,
 
-            confirmPassword: 'Qwerty123!',
+        //     password: 'Qwerty123!',
 
-            currency: 'USD'
+        //     confirmPassword: 'Qwerty123!',
 
-        };
+        //     currency: 'USD'
+
+        // };
  
         await test.step('Fill registration form', async () => {
 
-            await registrPage.registr(
+            await registrationPage.register(
 
                 user.name,
 
@@ -72,7 +76,7 @@ test.describe('Auth flow: Login + Registration', () => {
 
         await test.step('Verify user is logged in', async () => {
 
-            await registrPage.checkUserLoggedIn();
+            await registrationPage.checkUserLoggedIn();
 
         });
  

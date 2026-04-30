@@ -1,6 +1,6 @@
 import { Page, Locator, expect } from '@playwright/test';
  
-export class RegistrPage {
+export class RegistrationPage {
     readonly page: Page;
  
     // Locators
@@ -100,7 +100,7 @@ export class RegistrPage {
 
     }
  
-    async registr(name: string, email: string, password: string, confirmPassword: string, currency: string) {
+    async register(name: string, email: string, password: string, confirmPassword: string, currency: string) {
         await this.inputName.fill(name);
         await expect(this.inputName).toHaveValue(name);
 

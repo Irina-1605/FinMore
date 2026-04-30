@@ -1,4 +1,6 @@
 import { Page, Locator, expect } from '@playwright/test';
+import { Actions } from '../helpers/global actions';
+
  
 export class LoginPage {
     readonly page: Page;
@@ -15,11 +17,14 @@ export class LoginPage {
     readonly inputEmail: Locator;
     readonly inputPassword: Locator;
     readonly buttonLogin: Locator;
+    readonly elementName: Locator;
  
     readonly avatarka: Locator;
  
     readonly button: Locator;
     readonly registration: Locator;
+
+    readonly credsIsNotValid: Locator;
  
     constructor(page: Page) {
         this.page = page;
@@ -36,11 +41,14 @@ export class LoginPage {
         this.inputEmail = page.getByTestId('login-email-input');
         this.inputPassword = page.getByTestId('login-password-input');
         this.buttonLogin = page.getByTestId('login-submit-button');
+        this.elementName = page.getByTestId('login-submit-button');
  
         this.avatarka = page.locator('.lucide-user');
  
         this.button = page.getByTestId('switch-to-register-button');
         this.registration = page.getByTestId('register-title');
+
+        this.credsIsNotValid = page.getByTestId('login-error');
     }
  
     async goto() {
@@ -65,21 +73,33 @@ export class LoginPage {
         await expect(this.enterToRecord).toHaveText('Увійдіть до свого облікового запису');
  
         await expect(this.dontHaveRecord).toHaveText('Немає облікового запису? Зареєструватися');
+    
     }
  
+    async checkNegativeLoginTexts() {
+
+        await expect(this.credsIsNotValid).toHaveText('Невірний email або пароль');
+
+    }
+
     async checkLabels() {
         await expect(this.emailField).toHaveText('Email адреса');
         await expect(this.passwordField).toHaveText('Пароль');
     }
  
     async login(email: string, password: string) {
+
+        
         await this.inputEmail.fill(email);
         await expect(this.inputEmail).toHaveValue(email);
  
         await this.inputPassword.fill(password);
         await expect(this.inputPassword).toHaveValue(password);
+
+        await Actions.click(this.buttonLogin);
+        
  
-        await this.buttonLogin.click();
+        // await this.buttonLogin.click();
     }
  
     async checkUserLoggedIn() {
