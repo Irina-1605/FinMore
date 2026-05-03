@@ -3,7 +3,7 @@ export interface User {
     email: string;
     password: string;
     confirmPassword: string;
-    currency: string;
+   
 }
 export interface Login {
     email: string;
@@ -23,8 +23,7 @@ export const generateUser = (): User => {
         name: 'Test User',
         email: `${first}.${last}+${id}@gmail.com`,
         password: 'Qwerty123!',
-        confirmPassword: 'Qwerty123!',
-        currency: 'USD'
+        confirmPassword: 'Qwerty123!'
     };
 };
 
@@ -35,6 +34,33 @@ export const loginUser = (): Login => {
        password: 'admin123'
     }
 
+};
+
+export const invalidUserData = {
+    incorrectEmail: {
+        name: 'Test User',
+        email: 'invalidemail.com',
+        password: 'Qwerty123!',
+        confirmPassword: 'Qwerty123!'
+    },
+    emptyFields: {
+        name: '',
+        email: '',
+        password: '',
+        confirmPassword: ''
+    },
+    shortPassword: {
+        name: 'Test User',
+        email: 'test@gmail.com',
+        password: '123',
+        confirmPassword: '123'
+    },
+    passwordMismatch: {
+        name: 'Test User',
+        email: 'test@gmail.com',
+        password: 'Qwerty123!',
+        confirmPassword: 'Different123!'
+    },
 };
 
 

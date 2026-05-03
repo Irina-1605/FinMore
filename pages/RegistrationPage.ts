@@ -1,4 +1,5 @@
 import { Page, Locator, expect } from '@playwright/test';
+import { Actions } from '../helpers/global actions';
  
 export class RegistrationPage {
     readonly page: Page;
@@ -113,14 +114,22 @@ export class RegistrationPage {
         await this.inputConfirmPassword.fill(confirmPassword);
         await expect(this.inputConfirmPassword).toHaveValue(confirmPassword);
 
-        await this.currencySelect.selectOption(currency);
-        await expect(this.currencySelect).toHaveValue(currency);
+        await Actions.selectDropdown(this.currencySelect, currency, 'Выбираем валюту');
+
+        // await this.currencySelect.selectOption(currency);
+        // await expect(this.currencySelect).toHaveValue(currency);
  
         await this.registrationButton.click();
     }
  
     async checkUserLoggedIn() {
         await expect(this.avatarka).toBeVisible();
+    
+    }
+
+    async checkBrowserError() {
+
+        await Actions.getValidity(this.inputEmail, 'Сообщение об ошибке неправильного ввода емейла');
     }
  
 }

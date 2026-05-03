@@ -89,8 +89,8 @@ export class LoginPage {
  
     async login(email: string, password: string) {
 
-        await Actions.fillField(this.inputEmail, email);
-        await Actions.fillField(this.inputPassword, password);
+        await Actions.fillField(this.inputEmail, email, 'Заполняю емейл');
+        await Actions.fillField(this.inputPassword, password, 'Заполняю пароль');
 
         // await this.inputEmail.fill(email);
         // await expect(this.inputEmail).toHaveValue(email);

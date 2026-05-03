@@ -56,6 +56,8 @@ test.describe('Auth flow: Registration', () => {
  
         await test.step('Fill registration form', async () => {
 
+            const currency = 'EUR';
+
             await registrationPage.register(
 
                 user.name,
@@ -66,7 +68,7 @@ test.describe('Auth flow: Registration', () => {
 
                 user.confirmPassword,
 
-                user.currency
+                currency
 
             );
 

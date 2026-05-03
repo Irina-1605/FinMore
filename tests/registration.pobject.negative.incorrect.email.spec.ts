@@ -2,6 +2,7 @@ import { test, expect } from '@playwright/test';
 
 import { LoginPage } from '../pages/LoginPage';
 import { RegistrationPage } from '../pages/RegistrationPage';
+import { invalidUserData } from '../data/user.data';
 
  
 test.describe('Auth flow: Registration', () => {
@@ -32,23 +33,13 @@ test.describe('Auth flow: Registration', () => {
 
         });
 
-        // 3. All fields are empty
+        // 3. incorrect email
 
-        const user = {
+        const user = invalidUserData.incorrectEmail;
 
-            name: '',
+        await test.step('Incorrect Email', async () => {
 
-            email: '',
-
-            password: '',
-
-            confirmPassword: '',
-
-            currency: 'USD'
-
-        };
-
-        await test.step('All fields are empty', async () => {
+            const currency = 'EUR';
 
     
             await registrationPage.register(
@@ -61,10 +52,11 @@ test.describe('Auth flow: Registration', () => {
 
                 user.confirmPassword,
 
-                user.currency
+                currency
 
             );
-        
+            await registrationPage.checkBrowserError();
+            await registrationPage.checkRegistrationTexts();
             await expect(registrationPage.nameError).toBeVisible();
             await expect(registrationPage.emailError).toBeVisible();
             await expect(registrationPage.passwordError).toBeVisible();

@@ -9,10 +9,10 @@ export class Actions {
             console.log(` [FILL] ${name}: "${value}"`);
  
             await locator.waitFor({ state: 'visible' });
-            await locator.fill('');
             await locator.fill(value);
  
             console.log(`[FILL SUCCESS] ${name}`);
+            
         } catch (error) {
             console.error(`[FILL ERROR] ${name}`);
             throw new Error(`Failed to fill ${name}: ${error}`);

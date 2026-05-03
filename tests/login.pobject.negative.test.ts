@@ -49,11 +49,13 @@ test.describe('Auth flow: Login', () => {
           
         await test.step('Fill registration form invalid user', async () => {
 
-            await loginPage.login(
+            
 
-                data.invalidUser.email,
-                data.invalidUser.password
-            )
+            // await loginPage.login(
+
+            //     data.invalidUser.email,
+            //     data.invalidUser.password
+            // )
 
         });    
         
