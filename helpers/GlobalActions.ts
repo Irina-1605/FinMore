@@ -9,7 +9,9 @@ export class Actions {
             console.log(` [FILL] ${name}: "${value}"`);
  
             await locator.waitFor({ state: 'visible' });
+            await expect(locator).toBeEnabled();//можно использовать, можно нет
             await locator.fill(value);
+            await expect(locator).toHaveValue;//можно использовать, можно нет
  
             console.log(`[FILL SUCCESS] ${name}`);
             

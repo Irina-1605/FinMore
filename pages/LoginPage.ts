@@ -1,5 +1,5 @@
 import { Page, Locator, expect } from '@playwright/test';
-import { Actions } from '../helpers/global actions';
+import { Actions } from '../helpers/GlobalActions';
 
  
 export class LoginPage {
