@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
 import { FinancePage } from '../pages/FinancePage';
-import { loginUser } from '../data/user.data';
+import { loginUser, transactionData } from '../data/user.data';
 
 test.describe('Create transaction', () => {
 
@@ -25,13 +25,15 @@ test.describe('Create transaction', () => {
         });
 
         await test.step('Select transaction type: Expense', async () => {
-            await financePage.spendButton();
+            await financePage.expenseButton();
         });
 
         await test.step('Fill in the transaction form', async () => {
-            await financePage.fillSum('100');
-            await financePage.selectCategory('Продукти');
-            await financePage.fillDescription('Test expense transaction');
+            await financePage.fillSum(transactionData.expense.amount);
+            await financePage.selectCategory(transactionData.expense.category);
+            await financePage.fillDescription(transactionData.expense.description);
+            await financePage.selectAccount(transactionData.expense.account);
+            await financePage.fillDate(transactionData.expense.date);
         });
 
         await test.step('Submit the form and verify transaction was created', async () => {
@@ -65,9 +67,11 @@ test.describe('Create transaction', () => {
         });
 
         await test.step('Fill in the transaction form', async () => {
-            await financePage.fillSum('500');
-            await financePage.selectCategory('Зарплата');
-            await financePage.fillDescription('Test income transaction');
+            await financePage.fillSum(transactionData.income.amount);
+            await financePage.selectCategory(transactionData.income.category);
+            await financePage.fillDescription(transactionData.income.description);
+            await financePage.selectAccount(transactionData.income.account);
+            await financePage.fillDate(transactionData.income.date);
         });
 
         await test.step('Submit the form and verify transaction was created', async () => {

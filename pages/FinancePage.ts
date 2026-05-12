@@ -10,7 +10,7 @@ export class FinancePage {
     readonly transactionFormModal: Locator;
 
     // Modal form locators
-    readonly spend: Locator;
+    readonly expense: Locator;
     readonly income: Locator;
     readonly enterSum: Locator;
     readonly category: Locator;
@@ -29,7 +29,7 @@ export class FinancePage {
         this.addTransactionButton = page.getByTestId('add-transaction-page-button');
         this.transactionFormModal = page.getByTestId('transaction-form-modal');
 
-        this.spend = page.getByTestId('expense-type-button');
+        this.expense = page.getByTestId('expense-type-button');
         this.income = page.getByTestId('income-type-button');
         this.enterSum = page.getByTestId('transaction-amount-input');
         this.category = page.getByTestId('transaction-category-select');
@@ -52,8 +52,8 @@ export class FinancePage {
         await expect(this.transactionFormModal).toBeVisible();
     }
 
-    async spendButton() {
-        await Actions.click(this.spend, 'Витрати');
+    async expenseButton() {
+        await Actions.click(this.expense, 'Витрати');
     }
 
     async incomeButton() {

@@ -36,6 +36,40 @@ export const loginUser = (): Login => {
 
 };
 
+export interface Transaction {
+    amount: string;
+    category: string;
+    description: string;
+    account: string;
+    date: string;
+}
+
+const today = new Date();
+const todayDate = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+
+const randomItem = <T>(arr: T[]): T => arr[Math.floor(Math.random() * arr.length)];
+
+const expenseCategories = ['Продукти', 'Транспорт', 'Розваги', 'Комунальні', "Здоров'я"];
+const incomeCategories = ['Зарплата', 'Фриланс', 'Інвестиції'];
+const accounts = ['Готівка', 'Картка ПриватБанку', 'Картка Монобанку', 'Ощадний рахунок'];
+
+export const transactionData: Record<string, Transaction> = {
+    expense: {
+        amount: '100',
+        category: randomItem(expenseCategories),
+        description: 'Test expense transaction',
+        account: randomItem(accounts),
+        date: todayDate
+    },
+    income: {
+        amount: '500',
+        category: randomItem(incomeCategories),
+        description: 'Test income transaction',
+        account: randomItem(accounts),
+        date: todayDate
+    }
+};
+
 export const invalidUserData = {
     incorrectEmail: {
         name: 'Test User',
