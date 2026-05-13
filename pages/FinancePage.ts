@@ -1,5 +1,6 @@
 import { Page, Locator, expect } from '@playwright/test';
 import { Actions } from '../helpers/GlobalActions';
+import { transactionData } from '../data/user.data';
 
 export class FinancePage {
     readonly page: Page;
@@ -94,4 +95,44 @@ export class FinancePage {
     async createButton() {
         await Actions.click(this.create, 'Створити');
     }
+
+    async verifyTransactionCreated(transaction: any) {
+
+  const { description, category, amount, type, account } = transaction;
+
+
+  const item = this.page.locator('[data-testid^="transaction-item-"]').first();
+
+  await expect(item).toBeVisible();
+ 
+  
+
+  const sign = type === 'expense' ? '-' : '+';
+
+  const checks = {
+
+    'description': description,
+
+    'category': category,
+
+    'amount': `${sign}${amount}.00 UAH`
+
+  };
+ 
+
+
+  for (const [key, value] of Object.entries(checks)) {
+
+    await expect(item.locator(`[data-testid^="transaction-${key}-"]`)).toHaveText(value);
+
+  }
+ 
+  if (account) {
+
+    await expect(item.locator('[data-testid^="transaction-account-"]')).toHaveText(account);
+
+  }
+
+}
+ 
 }
