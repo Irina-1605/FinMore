@@ -40,6 +40,7 @@ test.describe('Create transaction', () => {
             await financePage.createButton();
             await expect(financePage.transactionFormModal).not.toBeVisible();
             await expect(page.getByText('Транзакції (1)')).toBeVisible();
+            await financePage.verifyTransactionCreated(transactionData.expense);
         });
     });
 
@@ -78,6 +79,7 @@ test.describe('Create transaction', () => {
             await financePage.createButton();
             await expect(financePage.transactionFormModal).not.toBeVisible();
             await expect(page.getByText('Транзакції (1)')).toBeVisible();
+            await financePage.verifyTransactionCreated(transactionData.income);
         });
     });
 
