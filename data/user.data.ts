@@ -42,6 +42,7 @@ export interface Transaction {
     description: string;
     account: string;
     date: string;
+    type: 'expense' | 'income';
 }
 
 const today = new Date();
@@ -59,14 +60,16 @@ export const transactionData: Record<string, Transaction> = {
         category: randomItem(expenseCategories),
         description: 'Test expense transaction',
         account: randomItem(accounts),
-        date: todayDate
+        date: todayDate,
+        type: 'expense'
     },
     income: {
         amount: '500',
         category: randomItem(incomeCategories),
         description: 'Test income transaction',
         account: randomItem(accounts),
-        date: todayDate
+        date: todayDate,
+        type: 'income'
     }
 };
 
