@@ -5,7 +5,7 @@ import { loginUser, transactionData } from '../data/user.data';
 
 test.describe('Create transaction', () => {
 
-    test('User can create an expense transaction', async ({ page }) => {
+    test('@smoke User can create an expense transaction', async ({ page }) => {
         const loginPage = new LoginPage(page);
         const financePage = new FinancePage(page);
         const user = loginUser();
